@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"net/http"
 	"time"
-	config "github.com/Natrix31/1Cs2c/internal/config"
+	config "github.com/Natrix31/onecs2c/internal/config"
 )
 
 type CustomerDB struct {
