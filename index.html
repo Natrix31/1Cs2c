@@ -10,6 +10,6 @@
 <body>
   <h1>1C:Back2Cloud</h1>
   <p>Клиент: {{.Customer}}</p>
-  <p>Базы: {{ range .DBs}}{{.}}, {{ end }}</p>
+  <p>Базы: {{ range .Databases}}<div class="dblist">База {{.DBName}} последний раз скопирована {{.LastBackup}}</div> {{ end }}</p>
   </body>
 </html>

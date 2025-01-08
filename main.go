@@ -7,27 +7,25 @@ import (
 	"time"
 )
 
-type indexData struct {
-	Customer string
-	DBs      []struct {
-		DBName     string
-		DBType     string
-		Status     string
-		LastBackup time.Time
-	}
+type CustomerDB struct {
+	DBName     string
+	DBType     string
+	Status     string
+	LastBackup time.Time
 }
 
+type indexData struct {
+	Customer  string
+	Databases []CustomerDB
+}
+
+//Это пока просто тестовые данные. Тут должен быть запрос в БД и получение реальных данных.
 var idxdata = &indexData{
-	Customer: "John Doe",
-	DBs: []struct {
-		DBName     string
-		DBType     string
-		Status     string
-		LastBackup time.Time
-	}{
-		{DBName: "db1", DBType: "MySQL", Status: "Online", LastBackup: time.Now()},
-		{DBName: "db2", DBType: "PostgreSQL", Status: "Offline", LastBackup: time.Now().Add(-time.Hour * 2)},
-		{DBName: "db3", DBType: "MongoDB", Status: "Online", LastBackup: time.Now().Add(-time.Minute * 30)},
+	Customer: "Зори белогорья",
+	Databases: []CustomerDB{
+		{DBName: "Палесика_ТП7", DBType: "file", Status: "Online", LastBackup: time.Now()},
+		{DBName: "Новикевич_ТП7", DBType: "sql", Status: "Offline", LastBackup: time.Now().Add(-time.Hour * 2)},
+		{DBName: "Новикевич_Бух", DBType: "sql", Status: "Online", LastBackup: time.Now().Add(-time.Minute * 30)},
 	},
 }
 
@@ -46,6 +44,9 @@ func main() {
 
 	http.HandleFunc("/", ViewIndexHandler)
 	http.HandleFunc("/settings", ViewSettingsHandler)
+
+	fs := http.FileServer(http.Dir("assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	slog.Info("Starting server on :8181...")
 	http.ListenAndServe(":8181", nil)
