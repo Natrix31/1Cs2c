@@ -1,10 +1,11 @@
-package main
+package ab2cler
 
 import (
 	"html/template"
 	"log/slog"
 	"net/http"
 	"time"
+	config "github.com/Natrix31/internal/config"
 )
 
 type CustomerDB struct {
@@ -49,5 +50,6 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	slog.Info("Starting server on :8181...")
+	conf, err := config.
 	http.ListenAndServe(":8181", nil)
 }
