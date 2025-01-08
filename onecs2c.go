@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log/slog"
 	"net/http"
+	"onecs2c/internal/config"
 	"time"
 )
 
@@ -49,5 +50,10 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	slog.Info("Starting server on :8181...")
-	http.ListenAndServe(":8181", nil)
+	config, err := config.ReadConfig("app.yml")
+	if err != nil {
+		slog.Info("Error reading config: %v", err)
+	}
+	addr := ":" + config.Port
+	http.ListenAndServe(addr, nil)
 }
