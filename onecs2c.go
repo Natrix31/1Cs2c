@@ -5,7 +5,6 @@ import (
 	"log/slog"
 	"net/http"
 	"time"
-	config "github.com/Natrix31/onecs2c/internal/config"
 )
 
 type CustomerDB struct {
@@ -20,7 +19,7 @@ type indexData struct {
 	Databases []CustomerDB
 }
 
-//Это пока просто тестовые данные. Тут должен быть запрос в БД и получение реальных данных.
+// Это пока просто тестовые данные. Тут должен быть запрос в БД и получение реальных данных.
 var idxdata = &indexData{
 	Customer: "Зори белогорья",
 	Databases: []CustomerDB{
@@ -50,6 +49,5 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	slog.Info("Starting server on :8181...")
-	conf, err := config.
 	http.ListenAndServe(":8181", nil)
 }
