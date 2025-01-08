@@ -1,11 +1,11 @@
-package ab2cler
+package onecs2c
 
 import (
 	"html/template"
 	"log/slog"
 	"net/http"
 	"time"
-	config "github.com/Natrix31/internal/config"
+	config "github.com/Natrix31/1Cs2c/internal/config"
 )
 
 type CustomerDB struct {
