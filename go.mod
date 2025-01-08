@@ -1,4 +1,4 @@
-module 1cs2c
+module 1Cs2c
 
 go 1.23.4
 
