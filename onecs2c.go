@@ -1,4 +1,4 @@
-package onecs2c
+package main
 
 import (
 	"html/template"
